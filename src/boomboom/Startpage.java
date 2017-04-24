@@ -41,6 +41,12 @@ int HEIGHT = gd.getDisplayMode().getHeight();
 		   exit = new JButton("Exit");
                    exit.setBounds(WIDTH/2 + WIDTH/50 - WIDTH/10,HEIGHT-HEIGHT/3  , 200, 100);
 			add(exit);
+                        exit.addActionListener(new ActionListener() {
+                       @Override
+                       public void actionPerformed(ActionEvent e) {
+                           System.exit(0);
+                       }
+                   });
 			//iq = new ImageIcon(getClass().getResource("iq.jpg"));
 	   
 	   }
