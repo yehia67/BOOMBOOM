@@ -12,6 +12,8 @@ package boomboom;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public  class GameContainner extends JPanel implements Runnable {
    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
    
@@ -25,6 +27,8 @@ int HEIGHT = gd.getDisplayMode().getHeight();
    private Thread thread;
    private BufferedImage image;
    private Graphics2D g;
+   private int firstpixel = 30 ;
+   private double avergeFPS;
     public GameContainner(){
         super();
         setFocusable(true);
@@ -49,8 +53,27 @@ int HEIGHT = gd.getDisplayMode().getHeight();
        running = true;
        image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
        g = (Graphics2D) image.getGraphics();
+       long startTime,URDTimeMills,waitTime,totaltime = 0;
+       int framecount = 0, maxFrameCount = 30;
+       long targetTime = 1000/firstpixel;
        while(running)
        {
+          startTime = System.nanoTime();
+          URDTimeMills = (System.nanoTime()-startTime)/1000000;
+          waitTime = targetTime-URDTimeMills;
+          try{
+              Thread.sleep(waitTime);
+          } catch (InterruptedException ex) {
+               totaltime += System.nanoTime()- startTime;
+               framecount++;
+               if(framecount == maxFrameCount)
+               {
+                   avergeFPS = 1000.0 / ((totaltime / framecount)/1000000);
+                   framecount = 0;
+                   totaltime = 0;
+               }
+           }
+          
            gameUpdate();
            gameRender();
            gameDraw();
@@ -62,7 +85,8 @@ int HEIGHT = gd.getDisplayMode().getHeight();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, WIDTH, HEIGHT);
        g.setColor(Color.BLACK);
-       g.drawString("BOOMBOOM!!", 100, 100);
+       g.drawString("BOOMBOOM!!"+avergeFPS, 10, 10);
+        
        
     }
 
