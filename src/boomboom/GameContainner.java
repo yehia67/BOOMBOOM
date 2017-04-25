@@ -11,16 +11,18 @@ package boomboom;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-public  class GameContainner extends JPanel implements Runnable {
+public  class GameContainner extends JPanel implements Runnable,KeyListener {
    Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-   
+   private static player playerr;
     //public int WIDTH =(int) screensize.getWidth(),HEIGHT =(int) screensize.getHeight();
     GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
- int WIDTH = gd.getDisplayMode().getWidth();
-int HEIGHT = gd.getDisplayMode().getHeight();
+public int WIDTH = gd.getDisplayMode().getWidth();
+public  int HEIGHT = gd.getDisplayMode().getHeight();
     
     boolean running;
    
@@ -82,21 +84,41 @@ int HEIGHT = gd.getDisplayMode().getHeight();
     }
 
     private void gameRender() {
-        g.setColor(Color.WHITE);
+        
         g.fillRect(0, 0, WIDTH, HEIGHT);
        g.setColor(Color.BLACK);
-       g.drawString("BOOMBOOM!!"+avergeFPS, 10, 10);
+       g.drawString("BOOMBOOM!!", 10, 10);
         
        
     }
 
     private void gameUpdate() {
-       
+        //if conditions bt3t el axes b3d kda barg3 dy w dx b zero
     }
 
     private void gameDraw() {
        Graphics g2 = this.getGraphics();
        g2.drawImage(image, 0,0, null);
        g2.dispose();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       int KeyCode = e.getKeyCode();
+       if(KeyCode == KeyEvent.VK_LEFT)
+       {
+          // player.setLeft(true);
+       }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

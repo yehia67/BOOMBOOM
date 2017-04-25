@@ -17,7 +17,7 @@ int HEIGHT = gd.getDisplayMode().getHeight();
 	   private JLabel exitt;  
        
        
-       private JButton start;
+           private JButton start;
 	   private JButton MULTIPLIER;
 	   private JButton dashboard;
 	   private JButton exit;
@@ -30,11 +30,18 @@ int HEIGHT = gd.getDisplayMode().getHeight();
 		   setLayout(null);
 		   start = new JButton("Start");
 		   start.setBounds(WIDTH/2 + WIDTH/50 - WIDTH/10, HEIGHT/6, 200, 100);
+                   start.addActionListener(new ActionListener() {
+                       @Override
+                       public void actionPerformed(ActionEvent e) {
+                          BOOMBOOM x = new BOOMBOOM(); 
+                           System.exit(0);// 3YZ A22FL EL FRAM EL ADYMA BAS FIHH BUG
+                       }
+                   });
                    add(start);
 		   MULTIPLIER = new JButton("MULTIPALIER");
 		   MULTIPLIER.setBounds(WIDTH/2 + WIDTH/50 - WIDTH/10,HEIGHT/3  , 200, 100);
                    add(MULTIPLIER);
-		   optionn = new JLabel("");
+		   
 		   dashboard = new JButton("DashBoard");
                    dashboard.setBounds(WIDTH/2 + WIDTH/50 - WIDTH/10,HEIGHT/2  , 200, 100);
 		   add(dashboard);
