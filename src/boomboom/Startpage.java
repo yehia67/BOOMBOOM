@@ -40,6 +40,13 @@ int HEIGHT = gd.getDisplayMode().getHeight();
                    add(start);
 		   MULTIPLIER = new JButton("MULTIPALIER");
 		   MULTIPLIER.setBounds(WIDTH/2 + WIDTH/50 - WIDTH/10,HEIGHT/3  , 200, 100);
+                   MULTIPLIER.addActionListener(new ActionListener() {
+                       @Override
+                       public void actionPerformed(ActionEvent e) {
+                      dashboard x = new dashboard();
+                      
+                       }
+                   });
                    add(MULTIPLIER);
 		   
 		   dashboard = new JButton("DashBoard");
