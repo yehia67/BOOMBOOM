@@ -38,7 +38,7 @@ public class dashboard extends Frame{
     dashboard() throws FileNotFoundException{
         setLayout(new BorderLayout());
         DASHBOARD = new JLabel("DASHBOARD!");
-        
+        add(DASHBOARD,BorderLayout.NORTH);
         printInText();
         init();
     }
@@ -60,6 +60,7 @@ public class dashboard extends Frame{
         this.setVisible(true);
         this.setResizable(false);
         this.setTitle("DASHBOARD");
+        
         
        
     }
