@@ -12,9 +12,12 @@ package boomboom;
 import java.io.*;
 import static java.lang.System.*;
 import java.util.*;
+import javax.swing.*;
+import java.awt.*;
 
-public class dashboard{
-   
+public class dashboard extends Frame{
+   private JLabel DASHBOARD;
+   private JTextArea scores;
     int Score = 1 ;
     String username;
     public int getScore()
@@ -24,16 +27,44 @@ public class dashboard{
     public void  setScore(int score){
         Score = score;
     }
-    public void print() throws FileNotFoundException{
-        File file = new File("dashboard.txt");
+    public static void print() throws FileNotFoundException{
+          File file = new File("dashboard.txt");
         Scanner read = new Scanner(file);
         while(read.hasNextLine()){
             String line = read.nextLine();
             System.out.println("line");
         }
     }
-  public static void main(String args[]) throws IOException{
-      String username;
+    dashboard() throws FileNotFoundException{
+        setLayout(new BorderLayout());
+        DASHBOARD = new JLabel("DASHBOARD!");
+        
+        printInText();
+        init();
+    }
+    public void printInText() throws FileNotFoundException
+    {
+          File file = new File("dashboard.txt");
+        Scanner read = new Scanner(file);
+        add(DASHBOARD,BorderLayout.NORTH);
+        scores = new JTextArea();
+        while(read.hasNextLine()){
+            String line = read.nextLine();
+            scores.append(line);
+    }
+    add(scores);
+    }
+    public void init(){
+       this.setLocationRelativeTo(null);// 3lshan yb2a fl nos
+        this.setSize(new Dimension(WIDTH, HEIGHT));
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setTitle("DASHBOARD");
+        
+       
+    }
+    public void addScore() throws IOException{
+         String username;
       Scanner sc = new Scanner(System.in);
      System.out.println("enter ur username");
       username = sc.toString();
@@ -43,5 +74,9 @@ public class dashboard{
      write.write(username+ " "+ ":");
      write.write(Integer.toString(x.getScore()));
       write.flush();
+    }
+  public static void main(String args[]) throws IOException{
+     dashboard x = new dashboard();
+     
   }   
 }
