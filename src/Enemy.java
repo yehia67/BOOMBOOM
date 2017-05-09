@@ -12,13 +12,15 @@ public class Enemy {
 	private int Screenheight;
         long lastTurn = System.currentTimeMillis();
         private static BufferedImage img;
-        private boolean up=false,left=false,right=false,down=false,dead = false;
+        private boolean up=false,left=false,right=false,down=false;
+        
+        boolean  dead ;
 
-	protected static int x ,y, dx , dy , r ,speed,health = 3;
+	protected static int x ,y, dx , dy , r ,speed,health = 1000;
 	
 	//constructor
 	public Enemy() {
-            
+                dead = false;
                 img = Assets.purpleidle;
 		Screenwidth = Game.getScreenWidth();
 		Screenheight =  Game.getScreenHeight();
@@ -42,11 +44,12 @@ public class Enemy {
                 y=400;
 		//speed = 1;
 	}
-	public void hit(){
+	public  void hit(){
             health--;
             if(health <= 0){
                 dead = true;
             }
+        System.out.println(health);
         }
 	
 	public void update() {
@@ -75,10 +78,15 @@ public class Enemy {
                 }
 		
         }
-	public  static void render(Graphics g) {
+	public  void render(Graphics g) {
 		
 		g.drawImage(img, x, y, null);
-                
+                  if(dead) 
+                   {
+                       g.dispose();
+                               
+                       //7ad y7ot 7agats
+                   }
          
 	}
         

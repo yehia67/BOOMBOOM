@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 import javax.swing.JPanel;
 
@@ -25,7 +26,7 @@ public class Game extends JPanel implements KeyListener,Runnable {
 	private Display display;
 	private Player player ;
         private Enemy enemy;
-        private Enemy enemy2; 
+         
 	private Image image;
         int enemywidth,enemyHeight;
 	public static ArrayList<Bullets> bullets;
@@ -46,8 +47,8 @@ public class Game extends JPanel implements KeyListener,Runnable {
 	    display.getWindow().addKeyListener(this);
            
         player = new Player();
-    //    enemy = new Enemy();
-        enemy2 = new Enemy();
+        enemy = new Enemy();
+       // enemy2 = new Enemy();
         image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("spiral2.GIF")).getScaledInstance(w, h, Image.SCALE_DEFAULT);
      
 		}
@@ -83,16 +84,28 @@ public class Game extends JPanel implements KeyListener,Runnable {
 	public void GameUpdate() {
 		
 		player.update();
-                //enemy.update();
-                enemy2.update();
+                enemy.update();
+                
                 if(Enemy.Collision(player.x,player.y,2*player.r,2*player.r,enemy.x,enemy.y,30,30))
                 {
-                    System.out.println("Collsion!");
+                   player.hiiit();
+                   System.out.println("player by2ll "+player.health);
+               //    if(player.deaaad)
+                //   {
+                  //     JOptionPane.showMessageDialog(null,"game over yall!");
+                   //    System.exit(0);
+                //   }
                 }
+                
                 
 	for (int i=0;i<bullets.size();i++) {
 			 bullets.get(i).update();
-			 
+			 if(Bullets.Collision(enemy.x,enemy.y,2*enemy.r,2*enemy.r,bullets.get(i).x,bullets.get(i).y,30,30))
+                {
+                   enemy.hit();
+                   System.out.println("enemy by2ll "+enemy.health);
+                
+                }
 		}
 	}
 
@@ -108,10 +121,10 @@ public class Game extends JPanel implements KeyListener,Runnable {
 		graphics = buffer.getDrawGraphics();
 		// draw here 
 		graphics.drawImage(image, 0, 0, this);
-		//graphics.drawImage(Assets.blueidle, 30, 30, null);
+		graphics.drawImage(Assets.blueidle, 30, 30, null);
 		Player.render(graphics);
-               // enemy.render(graphics);
-                enemy2.render(graphics);
+                enemy.render(graphics);
+                 
 		for (int i=0;i<bullets.size();i++) {
 		 bullets.get(i).draw(graphics); } 
 		// end of draw
@@ -168,4 +181,6 @@ public class Game extends JPanel implements KeyListener,Runnable {
 	public static int getScreenHeight() {
 		return height;
 	}
+
+    
 }

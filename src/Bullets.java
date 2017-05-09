@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class Bullets {
    
 	// fields
-	private int x,y,r,speed;
+	public int x,y,r,speed;
 	
 	//constructor
 	
@@ -24,8 +24,17 @@ public class Bullets {
 	}
 	 
 	public void update() {
-	y+=speed; }
+	y+=speed;
+        }
   
+        public static boolean Collision (int x1, int y1,int height1,int width1, int x2, int y2 ,int height2, int width2)
+        
+        {
+           if(x1+width1 >= x2 && y1 <= y2+height2 && y1+height1>=y2 )  //right-->left
+               return true;
+        
+           return false;
+        }
 
   }
 

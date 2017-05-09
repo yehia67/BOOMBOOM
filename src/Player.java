@@ -13,7 +13,9 @@ public class Player {
 	private static boolean firing;
 	private long firingTimer;
 	private long firingDelay;
-	//constructor
+  public int health = 3;
+  public boolean deaaad = false;
+//constructor
 	public Player() {
 		width = Game.getScreenWidth();
 		height = Game.getScreenHeight();
@@ -26,9 +28,15 @@ public class Player {
 	firing = false;
 	firingTimer = System.nanoTime();
 	firingDelay = 200;
-	}
 	
+        }
 	
+	public  void hiiit(){
+              health--;
+            if(health <= 0){
+                deaaad = true;
+            }
+        }
 	public void update() {
 		if (up) {
 			velY = -speed;
