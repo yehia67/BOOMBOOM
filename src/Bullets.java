@@ -27,14 +27,15 @@ public class Bullets {
 	y+=speed;
         }
   
-        public static boolean Collision (int x1, int y1,int height1,int width1, int x2, int y2 ,int height2, int width2)
+       public static boolean Collision (int x1, int y1,int width1, int x2, int y2 ,int height2, int width2)
         
         {
-           if(x1+width1 >= x2 && y1 <= y2+height2 && y1+height1>=y2 )  //right-->left
-               return true;
+         if(x1+width1 >= x2 && x1<= x2 + width2 && y1 <= y2+height2 && y1+width1>=y2 )  //right-->left
+             return true;
         
            return false;
         }
+
 
   }
 

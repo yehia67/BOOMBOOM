@@ -11,12 +11,12 @@ public class Enemy {
 	private int Screenwidth;
 	private int Screenheight;
         long lastTurn = System.currentTimeMillis();
-        private static BufferedImage img;
+        public static BufferedImage img;
         private boolean up=false,left=false,right=false,down=false;
         
         boolean  dead ;
 
-	protected static int x ,y, dx , dy , r ,speed,health = 1000;
+	protected static int x ,y, dx , dy , r ,speed,health = 10;
 	
 	//constructor
 	public Enemy() {
@@ -81,12 +81,7 @@ public class Enemy {
 	public  void render(Graphics g) {
 		
 		g.drawImage(img, x, y, null);
-                  if(dead) 
-                   {
-                       g.dispose();
-                               
-                       //7ad y7ot 7agats
-                   }
+                  
          
 	}
         
@@ -97,11 +92,11 @@ public class Enemy {
 	public void setDown(boolean b) {down = b; }
 
 
-        public static boolean Collision (int x1, int y1,int height1,int width1, int x2, int y2 ,int height2, int width2)
+        public static boolean Collision (int x1, int y1,int width1, int x2, int y2 ,int height2, int width2)
         
         {
-           if(x1+width1 >= x2 && y1 <= y2+height2 && y1+height1>=y2 )  //right-->left
-               return true;
+         if(x1+width1 >= x2 && x1<= x2 + width2 && y1 <= y2+height2 && y1+width1>=y2 )  //right-->left
+             return true;
         
            return false;
         }

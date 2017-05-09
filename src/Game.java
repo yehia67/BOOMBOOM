@@ -86,25 +86,28 @@ public class Game extends JPanel implements KeyListener,Runnable {
 		player.update();
                 enemy.update();
                 
-                if(Enemy.Collision(player.x,player.y,2*player.r,2*player.r,enemy.x,enemy.y,30,30))
+                if(Enemy.Collision(player.x,player.y,2*player.r,enemy.x,enemy.y,enemy.img.getWidth(null),enemy.img.getHeight(null)))
                 {
                    player.hiiit();
-                   System.out.println("player by2ll "+player.health);
-               //    if(player.deaaad)
-                //   {
-                  //     JOptionPane.showMessageDialog(null,"game over yall!");
-                   //    System.exit(0);
-                //   }
+                   //System.out.println("player by2ll "+player.health);
+                 if(player.deaaad)
+                  {
+                       //JOptionPane.showMessageDialog(null,"game over yall!");
+                       //System.exit(0);
+                   }
                 }
                 
                 
 	for (int i=0;i<bullets.size();i++) {
 			 bullets.get(i).update();
-			 if(Bullets.Collision(enemy.x,enemy.y,2*enemy.r,2*enemy.r,bullets.get(i).x,bullets.get(i).y,30,30))
+            if(Bullets.Collision(enemy.x,enemy.y,2*enemy.r,enemy.r,bullets.get(i).x,bullets.get(i).y,bullets.get(i).r))       
                 {
                    enemy.hit();
-                   System.out.println("enemy by2ll "+enemy.health);
-                
+                   //System.out.println("enemy by2ll "+enemy.health);
+                if(enemy.dead)
+                {
+                    System.out.println("23tbroo mat");   // ezay a remove el enemie
+                }
                 }
 		}
 	}
