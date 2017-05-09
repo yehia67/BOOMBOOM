@@ -5,10 +5,7 @@
  */
 package boomboom;
 
-/**
- *
- * @author Sony
- */
+
 import java.io.*;
 import static java.lang.System.*;
 import java.util.*;

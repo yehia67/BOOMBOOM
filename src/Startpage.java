@@ -72,13 +72,7 @@ public class Startpage  {
                        panel.add(start);
 		   MULTIPLIER = new JButton("MULTIPLAIER");
                    setButtonProp(MULTIPLIER,HEIGHT/3);
-                   MULTIPLIER.addActionListener(new ActionListener() {
-                       @Override
-                       public void actionPerformed(ActionEvent e) {
-                      dashboard x = new dashboard();
-                      
-                       }
-                   });
+                   
                    
                       panel.add(MULTIPLIER);
 		 
