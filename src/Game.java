@@ -25,9 +25,11 @@ public class Game extends JPanel implements KeyListener,Runnable {
 	private Display display;
 	private Player player ;
         private Enemy enemy;
+        private Enemy enemy2; 
 	private Image image;
         int enemywidth,enemyHeight;
 	public static ArrayList<Bullets> bullets;
+        public static ArrayList<Enemy> enemie;
 	// constructor
 	
 		public Game( int w, int h) {
@@ -44,7 +46,8 @@ public class Game extends JPanel implements KeyListener,Runnable {
 	    display.getWindow().addKeyListener(this);
            
         player = new Player();
-        enemy = new Enemy();
+    //    enemy = new Enemy();
+        enemy2 = new Enemy();
         image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("spiral2.GIF")).getScaledInstance(w, h, Image.SCALE_DEFAULT);
      
 		}
@@ -70,6 +73,7 @@ public class Game extends JPanel implements KeyListener,Runnable {
 
    	public void run() {
    		bullets = new ArrayList<Bullets>();
+                enemie = new ArrayList<Enemy>();
    		while(running) {
    		GameUpdate();
                
@@ -79,8 +83,8 @@ public class Game extends JPanel implements KeyListener,Runnable {
 	public void GameUpdate() {
 		
 		player.update();
-                enemy.update();
-                
+                //enemy.update();
+                enemy2.update();
                 if(Enemy.Collision(player.x,player.y,2*player.r,2*player.r,enemy.x,enemy.y,30,30))
                 {
                     System.out.println("Collsion!");
@@ -106,7 +110,8 @@ public class Game extends JPanel implements KeyListener,Runnable {
 		graphics.drawImage(image, 0, 0, this);
 		//graphics.drawImage(Assets.blueidle, 30, 30, null);
 		Player.render(graphics);
-                enemy.render(graphics);
+               // enemy.render(graphics);
+                enemy2.render(graphics);
 		for (int i=0;i<bullets.size();i++) {
 		 bullets.get(i).draw(graphics); } 
 		// end of draw

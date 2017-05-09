@@ -12,9 +12,9 @@ public class Enemy {
 	private int Screenheight;
         long lastTurn = System.currentTimeMillis();
         private static BufferedImage img;
-        private boolean up=false,left=false,right=false,down=false;
+        private boolean up=false,left=false,right=false,down=false,dead = false;
 
-	protected static int x ,y, dx , dy , r ,speed;
+	protected static int x ,y, dx , dy , r ,speed,health = 3;
 	
 	//constructor
 	public Enemy() {
@@ -42,7 +42,12 @@ public class Enemy {
                 y=400;
 		//speed = 1;
 	}
-	
+	public void hit(){
+            health--;
+            if(health <= 0){
+                dead = true;
+            }
+        }
 	
 	public void update() {
 		
