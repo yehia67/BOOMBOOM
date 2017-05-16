@@ -29,7 +29,7 @@ public class dashboard extends Frame{
         Scanner read = new Scanner(file);
         while(read.hasNextLine()){
             String line = read.nextLine();
-            System.out.println("line");
+            //System.out.println("line");
         }
     }
     dashboard() throws FileNotFoundException{
