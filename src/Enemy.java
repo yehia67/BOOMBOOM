@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class Enemy {
         private boolean up=false,left=false,right=false,down=false;
 	protected  int x ,y, r ,speed;
         private double dx , dy; 
-	public int health = 30;
+	public int health = 3;
         private static long firingTimer;
 	private static long firingDelay;
         double angle;
@@ -33,6 +34,9 @@ public class Enemy {
         public int getr()
         {
             return r;
+        }
+        public Rectangle getBounds(){
+            return new Rectangle(x,y,83,82);
         }
 	public Enemy() {
             

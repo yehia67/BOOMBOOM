@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -99,7 +100,17 @@ public class Game extends JPanel implements KeyListener,Runnable {
                  for (int i=0;i<enemies.length;i++) {
                      if(!enemies[i].dead)
                      enemies[i].update();
-        if(enemies[i].Collision(player.x,player.y,2*player.r,enemies[i].x,enemies[i].y,enemies[i].img.getWidth(null),enemies[i].img.getHeight(null)))
+        Rectangle Enmie = enemies[i].getBounds();
+        
+        for (int j=0;j<bullets.size();j++) {
+  bullets.get(j).update(); 
+  Rectangle bull = bullets.get(j).getBounds();
+  if(bull.intersects(Enmie))
+  {
+      enemies[i].Hit();
+  }
+ }
+                     if(enemies[i].Collision(player.x,player.y,2*player.r,enemies[i].x,enemies[i].y,enemies[i].img.getWidth(null),enemies[i].img.getHeight(null)))
                 
         
         {
@@ -111,29 +122,15 @@ public class Game extends JPanel implements KeyListener,Runnable {
                       System.exit(0);
                    }
                 }
-              for (int j=0;j<bullets.size();j++) {
-			 bullets.get(j).update();
-                
-					
-if(bullets.get(i).Collision(enemies[i].x, enemies[i].y, 2*enemies[i].r, bullets.get(i).x, bullets.get(i).y,bullets.get(i).r*2,bullets.get(i).r*2))
-              {
-              
-    System.out.println("collision isa yarab");
-    // enemies[i].Hit();
-                    }
-		
-        }  
-           
-           
-            }
-                
-	
-	}
-
-	public void GameDraw() {
-		
-			
-		           
+             
+ 
+                 }
+  for (int j=0;j<bullets.size();j++) {
+  bullets.get(j).update();                  
+ }
+        }
+      
+	public void GameDraw() {          
 		buffer = display.getCanvas().getBufferStrategy();
 		if (buffer == null) {
 			display.getCanvas().createBufferStrategy(3);
@@ -145,7 +142,6 @@ if(bullets.get(i).Collision(enemies[i].x, enemies[i].y, 2*enemies[i].r, bullets.
 		//graphics.drawImage(Assets.blueidle, 30, 30, null);
 		Player.render(graphics);
                 
-             
            for (int i=0;i<enemies.length;i++) {
               if(!enemies[i].dead)
                enemies[i].render(graphics); }

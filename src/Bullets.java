@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 public class Bullets {
    
@@ -28,7 +29,9 @@ public class Bullets {
 		speed = -3;
 		r=3;
 	}
-	
+	public Rectangle getBounds(){
+            return new Rectangle(x,y,2*r,2*r);
+        }
 	public void draw(Graphics g) {
 		g.setColor(Color.blue);
 		g.fillOval(x+r+2, y, 2*r, 2*r);
