@@ -20,7 +20,7 @@ public class Startpage  {
 	   private JButton MULTIPLIER;
 	   private JButton dashboard;
 	   private JButton exit;
-	   private String title;
+	   
 	 
 	   
 	   
@@ -31,7 +31,7 @@ public class Startpage  {
 
               // b.setBackground(Color.white);
                b.setContentAreaFilled(false);
-               b.setForeground(Color.RED);
+               b.setForeground(Color.blue);
                b.setBorderPainted(false);
                b.setOpaque(false);
                
@@ -50,7 +50,7 @@ public class Startpage  {
                 window.setResizable(false);
                 window.setTitle("BOOMBOOM!!");
                 window.setLocationRelativeTo(null);
-                ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("spiral2.GIF"))
+                ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("black2.jpg"))
                 .getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT));
                   JLabel l = new JLabel(image);
                  
@@ -72,8 +72,7 @@ public class Startpage  {
                        panel.add(start);
 		   MULTIPLIER = new JButton("MULTIPLAIER");
                    setButtonProp(MULTIPLIER,HEIGHT/3);
-                   
-                   
+
                       panel.add(MULTIPLIER);
 		 
 		   dashboard = new JButton("LeaderBoard");
