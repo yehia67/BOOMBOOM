@@ -12,7 +12,7 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class dashboard extends Frame{
+public class dashboard extends JPanel{
    private JLabel DASHBOARD;
    private JTextArea scores;
     int Score = 1 ;
@@ -25,7 +25,7 @@ public class dashboard extends Frame{
         Score = score;
     }
     public static void print() throws FileNotFoundException{
-          File file = new File("dashboard.txt");
+          File file = new File("D:\\programing\\Projects\\game project\\BOOMBOOM\\src\\dashboard.txt");
         Scanner read = new Scanner(file);
         while(read.hasNextLine()){
             String line = read.nextLine();
@@ -41,7 +41,7 @@ public class dashboard extends Frame{
     }
     public void printInText() throws FileNotFoundException
     {
-          File file = new File("dashboard.txt");
+          File file = new File("D:\\programing\\Projects\\game project\\BOOMBOOM\\src\\dashboard.txt");
         Scanner read = new Scanner(file);
         add(DASHBOARD,BorderLayout.NORTH);
         scores = new JTextArea();
@@ -52,11 +52,11 @@ public class dashboard extends Frame{
     add(scores);
     }
     public void init(){
-       this.setLocationRelativeTo(null);// 3lshan yb2a fl nos
+       //this.setLocationRelativeTo(null);// 3lshan yb2a fl nos
         this.setSize(new Dimension(WIDTH, HEIGHT));
         this.setVisible(true);
-        this.setResizable(false);
-        this.setTitle("DASHBOARD");
+        //this.setResizable(false);
+       //this.setTitle("DASHBOARD");
         
         
        
@@ -67,7 +67,7 @@ public class dashboard extends Frame{
      System.out.println("enter ur username");
       username = sc.toString();
       dashboard x = new dashboard();
-     FileWriter writefile = new FileWriter("dashboard.txt");
+     FileWriter writefile = new FileWriter("D:\\programing\\Projects\\game project\\BOOMBOOM\\src\\dashboard.txt");
      BufferedWriter write = new BufferedWriter(writefile);
      write.write(username+ " "+ ":");
      write.write(Integer.toString(x.getScore()));

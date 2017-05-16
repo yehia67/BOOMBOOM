@@ -77,7 +77,12 @@ public class Startpage  {
 		 
 		   dashboard = new JButton("LeaderBoard");
                    setButtonProp(dashboard,HEIGHT/2);
-
+                    dashboard.addActionListener(new ActionListener() {
+                   @Override
+                   public void actionPerformed(ActionEvent e) {
+                   LeaderBoard x =new LeaderBoard(); 
+                   }
+               });
 		       panel.add(dashboard);
 		   exit = new JButton("Exit");
                    setButtonProp(exit,HEIGHT-HEIGHT/3 );

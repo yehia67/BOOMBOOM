@@ -33,7 +33,7 @@ public class Game extends JPanel implements KeyListener,Runnable {
        public Enemy[] enemies =  new Enemy[5];
        private long delay ;
        private Timer timer;
-       int level = 5;
+       int level = 5,  score = 10;
        private boolean flag = false;
 	// constructor
 	
@@ -80,11 +80,20 @@ public class Game extends JPanel implements KeyListener,Runnable {
             delay = System.nanoTime();
            timer = new Timer();
    		bullets = new ArrayList<Bullets>();
-               for (int i=0;i< level ;i++) {
+               for (int i=0;i< 5 ;i++) {
                    enemies[i] = new Enemy();
 
-               }
-               
+               } 
+                  if(level > score)
+                  {
+                      level += 10;
+                      score += 5;
+                      player.Health += 300;
+                      for (int i=0;i< level ;i++) {
+                   enemies[i] = new Enemy();
+
+               }  
+                  }
                 
    		while(running) {
    		GameUpdate();
@@ -100,6 +109,7 @@ public class Game extends JPanel implements KeyListener,Runnable {
                  for (int i=0;i<enemies.length;i++) {
                      if(!enemies[i].dead)
                      enemies[i].update();
+                         
         Rectangle Enmie = enemies[i].getBounds();
         
         for (int j=0;j<bullets.size();j++) {
@@ -108,6 +118,7 @@ public class Game extends JPanel implements KeyListener,Runnable {
   if(bull.intersects(Enmie))
   {
       enemies[i].Hit();
+      
   }
  }
                      if(enemies[i].Collision(player.x,player.y,2*player.r,enemies[i].x,enemies[i].y,enemies[i].img.getWidth(null),enemies[i].img.getHeight(null)))
@@ -118,11 +129,11 @@ public class Game extends JPanel implements KeyListener,Runnable {
                    //System.out.println("player by2ll "+player.Health);
                  if(player.Dead)
                   {
-                       JOptionPane.showMessageDialog(null,"game over yall!");
+                       JOptionPane.showMessageDialog(null,"GAME OVER!");
                       System.exit(0);
                    }
                 }
-             
+              
  
                  }
   for (int j=0;j<bullets.size();j++) {
@@ -143,9 +154,14 @@ public class Game extends JPanel implements KeyListener,Runnable {
 		Player.render(graphics);
                 
            for (int i=0;i<enemies.length;i++) {
-              if(!enemies[i].dead)
-               enemies[i].render(graphics); }
-            
+              if(!enemies[i].dead)     
+               enemies[i].render(graphics); 
+              if(enemies[i].dead == true)
+             {
+              level++;   
+             }
+           }
+             
 		for (int i=0;i<bullets.size();i++) {
 		 bullets.get(i).draw(graphics); } 
 		// end of draw

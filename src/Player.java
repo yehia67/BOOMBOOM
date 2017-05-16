@@ -13,7 +13,7 @@ public class Player {
 	private static boolean firing;
 	private long firingTimer;
 	private long firingDelay;
-        public int Health = 300;
+        public int Health = 3000;
         public boolean Dead = false;
 	//constructor
 	public Player() {
