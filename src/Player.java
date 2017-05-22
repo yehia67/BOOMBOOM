@@ -19,7 +19,11 @@ public class Player {
 	private  boolean firing;
 	private long firingTimer;
 	private long firingDelay;
+<<<<<<< HEAD
         public  int Health = 100;
+=======
+        public int Health = 3000;
+>>>>>>> origin/master
         public boolean Dead = false;
         private int player;
         

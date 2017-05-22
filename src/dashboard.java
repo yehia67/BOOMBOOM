@@ -20,6 +20,7 @@ import java.awt.image.ImageProducer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+<<<<<<< HEAD
 public class dashboard implements KeyListener {
  public  JPanel dashpanel;
  private int width;
@@ -199,6 +200,14 @@ private JPanel scorepanel;
                         JOptionPane.PLAIN_MESSAGE);
     
       if (response == JOptionPane.OK_OPTION)
+=======
+public class dashboard extends JPanel{
+   private JLabel DASHBOARD;
+   private JTextArea scores;
+    int Score = 1 ;
+    String username;
+    public int getScore()
+>>>>>>> origin/master
       {
      username = txt.getText();
      score o = new score ();
@@ -233,6 +242,7 @@ private JPanel scorepanel;
 //         Logger.getLogger(dashboard.class.getName()).log(Level.SEVERE, null, ex);
 //     }
       }
+<<<<<<< HEAD
  }
  @Override
  
@@ -257,5 +267,58 @@ private JPanel scorepanel;
     @Override
     public void keyReleased(KeyEvent e) {
       //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+=======
+    public void  setScore(int score){
+        Score = score;
+    }
+    public static void print() throws FileNotFoundException{
+          File file = new File("D:\\programing\\Projects\\game project\\BOOMBOOM\\src\\dashboard.txt");
+        Scanner read = new Scanner(file);
+        while(read.hasNextLine()){
+            String line = read.nextLine();
+            //System.out.println("line");
+        }
+    }
+    dashboard() throws FileNotFoundException{
+        setLayout(new BorderLayout());
+        DASHBOARD = new JLabel("DASHBOARD!");
+        add(DASHBOARD,BorderLayout.NORTH);
+        printInText();
+        init();
+    }
+    public void printInText() throws FileNotFoundException
+    {
+          File file = new File("D:\\programing\\Projects\\game project\\BOOMBOOM\\src\\dashboard.txt");
+        Scanner read = new Scanner(file);
+        add(DASHBOARD,BorderLayout.NORTH);
+        scores = new JTextArea();
+        while(read.hasNextLine()){
+            String line = read.nextLine();
+            scores.append(line);
+    }
+    add(scores);
+    }
+    public void init(){
+       //this.setLocationRelativeTo(null);// 3lshan yb2a fl nos
+        this.setSize(new Dimension(WIDTH, HEIGHT));
+        this.setVisible(true);
+        //this.setResizable(false);
+       //this.setTitle("DASHBOARD");
+        
+        
+       
+    }
+    public void addScore() throws IOException{
+         String username;
+      Scanner sc = new Scanner(System.in);
+     System.out.println("enter ur username");
+      username = sc.toString();
+      dashboard x = new dashboard();
+     FileWriter writefile = new FileWriter("D:\\programing\\Projects\\game project\\BOOMBOOM\\src\\dashboard.txt");
+     BufferedWriter write = new BufferedWriter(writefile);
+     write.write(username+ " "+ ":");
+     write.write(Integer.toString(x.getScore()));
+      write.flush();
+>>>>>>> origin/master
     }
 }

@@ -89,6 +89,7 @@ public class Startpage  {
                    });
                       panel.add(MULTIPLIER);
 		 
+<<<<<<< HEAD
 		   leaderboard = new JButton("LeaderBoard");
                    setButtonProp(leaderboard,HEIGHT/2);
                     leaderboard.addActionListener(new ActionListener() {
@@ -102,6 +103,17 @@ public class Startpage  {
                    });
 
 		       panel.add(leaderboard);
+=======
+		   dashboard = new JButton("LeaderBoard");
+                   setButtonProp(dashboard,HEIGHT/2);
+                    dashboard.addActionListener(new ActionListener() {
+                   @Override
+                   public void actionPerformed(ActionEvent e) {
+                   LeaderBoard x =new LeaderBoard(); 
+                   }
+               });
+		       panel.add(dashboard);
+>>>>>>> origin/master
 		   exit = new JButton("Exit");
                    setButtonProp(exit,HEIGHT-HEIGHT/3 );
 
