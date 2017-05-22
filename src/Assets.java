@@ -1,27 +1,27 @@
 
-import java.awt.*;
+
 import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
+
         
 public class Assets {
   //any image music etc.
-    private static final int width = 113, height = 68;
-    public static BufferedImage  purpleidle, purpleupdown, purpleleft, purpleright,
+   // private static final int width = 113, height = 68;
+    public static BufferedImage  purpleidle,purpledead, purpleupdown, purpleleft, purpleright,
                                  blueidle,blueupdown,blueleft,blueright,
                                  greenidle,greenupdown,greenleft,greenright;
-     private static Image img;
-     
+   //  private static Image img;
+ // public  static MediaPlayer levelup;
+
     public static void init()
     {
-    // ImageIcon icon = new ImageIcon("/images/alien-sprite-sheet.png");
-     
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/images/alien-sprite-sheet.png"));
-       
-   
-       
+      
+        //purpleidle= sheet.crop(0,0,width,height);
+        purpleidle= ImageLoader.loadImage("purple.png");
+        blueidle =  ImageLoader.loadImage("blue.png");
+        greenidle = ImageLoader.loadImage("green.png");
+        //purpledead= ImageLoader.loadImage("purpledead.png");
         
-        purpleidle= sheet.crop(0,0,width,height);
-        purpleupdown = sheet.crop(width,0,width,height); //purpleupdown
+       /* purpleupdown = sheet.crop(width,0,width,height); //purpleupdown
         purpleright = sheet.crop(width*2,0,width,height);//purpleright
        purpleleft = sheet.crop(width*3,0,width,height);//purpleright
    
@@ -34,7 +34,7 @@ public class Assets {
         greenidle = sheet.crop(0,height*3,width,height*2); //purpleupdown
         greenupdown = sheet.crop(width,height*3,width,height*2); //purpleupdown
         greenright = sheet.crop(width*2,height*3,width,height*2);//purpleright
-        greenleft = sheet.crop(width*3,height*3,width,height*2);//purpleright
+        greenleft = sheet.crop(width*3,height*3,width,height*2);//purpleright*/
        
     }
     

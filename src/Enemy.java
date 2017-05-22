@@ -1,24 +1,26 @@
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
 import java.util.Random;
-import javax.swing.*;
-import java.util.*;
+//import javax.swing.*;
+//import java.util.*;
 public class Enemy {
     
 
 	private static int Screenwidth;
 	private static int Screenheight;
-        long lastTurn = System.currentTimeMillis();
-        public static Image img;
+     //   long lastTurn = System.currentTimeMillis();
+        private  Image img;
         private boolean up=false,left=false,right=false,down=false;
 	protected  int x ,y, r ,speed;
+        protected int ewidth,eheight;
         private double dx , dy; 
-	public int health = 3;
-        private static long firingTimer;
-	private static long firingDelay;
+	private int health ;
+        private int rank;
+      //  private static long firingTimer;
+	//private static long firingDelay;
         double angle;
         double rad;
         public boolean dead = false;
@@ -35,25 +37,55 @@ public class Enemy {
         {
             return r;
         }
-        public Rectangle getBounds(){
-            return new Rectangle(x,y,83,82);
+        public int getRank ()
+        {
+            return rank;
         }
-	public Enemy() {
+      //  public Rectangle getBounds(){
+        //    return new Rectangle(x,y,83,82);
+        //}
+	public Enemy(int rank ) {
+            this.rank= rank;
+            switch (rank){
+                case 1:
+                    img = Assets.greenidle.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+                    speed = 3;
+                    health=3;
+                    break;
+                case 2:
+                    img = Assets.blueidle.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                    speed = 5;
+                    health=6;
+                    break;
+                case 3:
+                        img = Assets.purpleidle.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+                    speed = 6;
+                    health=8;
+                    break;
+                default :  img = Assets.greenidle.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+                    speed = 3;
+                    health=3;
+                    }
             
-                img = Assets.purpleidle.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+               // img = Assets.purpleidle.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                ewidth= img.getWidth(null);
+                eheight = img.getHeight(null);
 		Screenwidth = Game.getScreenWidth();
 		Screenheight =  Game.getScreenHeight();
 		x = new Random().nextInt(Screenwidth);
-                y =  new Random().nextInt(Screenheight);
-                
-                angle = Math.random()*140*20;
+                y = 0;
+               // speed =5;
+               // angle = Math.random()*140*20;
+               angle = Math.random()*150+30;
                 rad = Math.toRadians(angle);
-                dx= 1;//Math.cos(rad)*speed;
-                dy =1;// Math.sin(rad)* speed;
+              //  dx= 1;//Math.cos(rad)*speed;
+               // dy =1;// Math.sin(rad)* speed;
+                dx= Math.cos(rad)*speed;
+                dy = Math.sin(rad)* speed;
                 if(dx==0)
-                    dx++;
+                    dx=1*speed;
                 if(dy==0)
-                    dy++;
+                    dy=1*speed  ;
                 
                 
              //   dx+=1;
@@ -63,7 +95,7 @@ public class Enemy {
           //      dy=0;
             //    x=300;
               //  y=400;
-		speed = 1;
+		
 	}
 public void Hit(){
     health--;
@@ -79,30 +111,30 @@ public void Hit(){
     x+=dx;
     y+=dy;
     
-    if(y<r)
-    {       y=r;
+    if(y<=0)
+    {       y=0;
             dy*=-1;
             };
-    if (x>Screenwidth-r)
-    {x=Screenwidth-r;
+    if (x>=Screenwidth-ewidth)
+    {x=Screenwidth-ewidth;
     dx*=-1;
     }
     
-    if(x<r)
+    if(x<=0)
     {
-        x=r;
+        x=0;
         dx*=-1;
     }
    
-     if (y>Screenheight-r)
-     {y=Screenheight-r;
+     if (y>=Screenheight-eheight)
+     {y=Screenheight-eheight;
      dy*=-1;
                 }
      
 		
         }
 	public void render(Graphics g) {
-		int r = new Random().nextInt(100);
+		//int r = new Random().nextInt(100);
                 
                for (int i=0;i<5;i++) {
                    
@@ -117,10 +149,10 @@ public void Hit(){
 	public void setRight(boolean b) {right = b; }
 	public void setDown(boolean b) {down = b; }
 
-    public static boolean Collision (int x1, int y1,int width1, int x2, int y2 ,int height2, int width2)
+    public  boolean Collision (int x1, int y1,int width1, int height1)
         
         {
-         if(x1+width1 >= x2 && x1<= x2 + width2 && y1 <= y2+height2 && y1+width1>=y2 )  //right-->left
+         if(x1+width1 >= x && x1<= x + ewidth && y1 <= y+eheight && y1+height1>=y )  //right-->left
              return true;
         
            return false;

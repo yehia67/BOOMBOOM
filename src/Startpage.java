@@ -1,5 +1,6 @@
 
 
+import com.sun.java.accessibility.util.AWTEventMonitor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,11 +19,12 @@ public class Startpage  {
                    int buttonHeight=100;
        private JButton start;
 	   private JButton MULTIPLIER;
-	   private JButton dashboard;
+	   private JButton leaderboard;
 	   private JButton exit;
-	   
-	 
-	   
+           private static dashboard board;
+	   private static  int mode ;
+	 static  Game game;
+	 static  GameMulti game2;
 	   
 	   public void setButtonProp (JButton b,int y )
            {
@@ -31,7 +33,7 @@ public class Startpage  {
 
               // b.setBackground(Color.white);
                b.setContentAreaFilled(false);
-               b.setForeground(Color.blue);
+               b.setForeground(Color.red);
                b.setBorderPainted(false);
                b.setOpaque(false);
                
@@ -44,13 +46,14 @@ public class Startpage  {
                 
                 panel.setLayout(null);
                 panel.setSize(WIDTH,HEIGHT);
+                panel.setCursor(Cursor.getDefaultCursor());
                window.setLayout(null);
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
                 window.setBounds(0,0,WIDTH,HEIGHT);
                 window.setResizable(false);
                 window.setTitle("BOOMBOOM!!");
                 window.setLocationRelativeTo(null);
-                ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("black2.jpg"))
+                ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("gif1.gif"))
                 .getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT));
                   JLabel l = new JLabel(image);
                  
@@ -64,7 +67,8 @@ public class Startpage  {
                        public void actionPerformed(ActionEvent e) {
                          //  panel.setFocusable(false);
                             panel.setVisible(false);
-                           Game game = new Game(window.getContentPane().getWidth(),window.getContentPane().getHeight());
+                            mode = 1;
+                            game = new Game(window.getContentPane().getWidth(),window.getContentPane().getHeight(),mode);
 		            game.start();
                   //window.setVisible(false);
                        }
@@ -72,13 +76,32 @@ public class Startpage  {
                        panel.add(start);
 		   MULTIPLIER = new JButton("MULTIPLAIER");
                    setButtonProp(MULTIPLIER,HEIGHT/3);
-
+ MULTIPLIER.addActionListener(new ActionListener() {
+                       @Override
+                       public void actionPerformed(ActionEvent e) {
+                         //  panel.setFocusable(false);
+                            panel.setVisible(false);
+                            mode = 2;
+                            game2 = new GameMulti(window.getContentPane().getWidth(),window.getContentPane().getHeight());
+		            //game2.start();
+                  //window.setVisible(false);
+                       }
+                   });
                       panel.add(MULTIPLIER);
 		 
-		   dashboard = new JButton("LeaderBoard");
-                   setButtonProp(dashboard,HEIGHT/2);
+		   leaderboard = new JButton("LeaderBoard");
+                   setButtonProp(leaderboard,HEIGHT/2);
+                    leaderboard.addActionListener(new ActionListener() {
+                       @Override
+                       public void actionPerformed(ActionEvent e) {
+                         //  panel.setFocusable(false);
+                            panel.setVisible(false);
+              board = new dashboard (window.getContentPane().getWidth(), window.getContentPane().getHeight());
+		         window.addKeyListener(board);
+                       }
+                   });
 
-		       panel.add(dashboard);
+		       panel.add(leaderboard);
 		   exit = new JButton("Exit");
                    setButtonProp(exit,HEIGHT-HEIGHT/3 );
 
@@ -101,5 +124,27 @@ public class Startpage  {
 	Startpage x = new Startpage();
 
 }
+        public static void  returnToStartPage ()
+        {
+            if (mode == 1){
+            game.HideDisplay();
+         panel.setVisible(true);
+         // game.getDisplay()=null;
+           //game=null;
+                       window.removeKeyListener(game);
+
+            }
+            else if (mode ==2){
+                game2.HideDisplay();
+                panel.setVisible(true);
+                window.removeKeyListener(game2);
+            }
+        }
+        public static void returnFromDash()
+        {
+           board.dashpanel.setVisible(false);
+           panel.setVisible(true);
+           window.removeKeyListener(board);
+        }
 }
 	   

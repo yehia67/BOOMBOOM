@@ -3,20 +3,31 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import sun.audio.*;
+
 public class Player {
 
 	// fields
 	private int width;
 	private int height;
 	private boolean up=false,left=false,right=false,down=false;
-	protected static int x ,y, velX , velY , r ,speed;
-	private static boolean firing;
+	protected  int x ,y, velX , velY , r ,speed;
+	private  boolean firing;
 	private long firingTimer;
 	private long firingDelay;
-        public int Health = 300;
+        public  int Health = 100;
         public boolean Dead = false;
+        private int player;
+        
 	//constructor
-	public Player() {
+	public Player(int player) {
+       
+           this.player=player;
+
 		width = Game.getScreenWidth();
 		height = Game.getScreenHeight();
 		x = width/2;
@@ -24,13 +35,14 @@ public class Player {
 		velX = 0;
 		velY = 0;
 		r = 15;
-		speed = 2;
+		speed = 10;
 	firing = false;
 	firingTimer = System.nanoTime();
-	firingDelay = 200;
+	firingDelay = 100; // default 200
 	}
 	public void hit(){
     Health--;
+    //System.out.println(Health);
     if(Health <= 0)
     {
         Dead = true;
@@ -61,21 +73,37 @@ public class Player {
 		if (firing)  {
 	   long elapsed = (System.nanoTime() - firingTimer)/1000000;
 		if(elapsed > firingDelay ) {	
+                  
 	   Game.bullets.add(new Bullets(x,y));
 			firingTimer = System.nanoTime(); }
 		}
 	}
-	public  static void render(Graphics g) {
+	public   void render(Graphics g) {
+            if (player==1){
 		
 		g.setColor(Color.red);
-		g.fillOval(x, y, r, r);	
+		g.fillOval(x, y, r, r);	}
+            else  if (player==2){
+		
+		g.setColor(Color.green);
+		g.fillOval(x, y, r, r);	}
+            
 	}
+        public void renderdead (Graphics g)
+        {
+            g.setColor(new Color (50,50,50,0));
+        }
 	
 	public void setUp(boolean b) {up = b; }
 	public void setLeft(boolean b) {left = b; }
 	public void setRight(boolean b) {right = b; }
 	public void setDown(boolean b) {down = b; }
 	
-	public static void setFiring(boolean b) {  firing = b; }
+	public  void setFiring(boolean b) {  firing = b; }
 	
+        public void setMouseLocation (int x , int y)
+        {
+            this.x=x;
+            this.y=y;
+        }
 }
